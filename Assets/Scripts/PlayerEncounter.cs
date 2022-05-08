@@ -35,6 +35,7 @@ public class PlayerEncounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //git test
         foreach (var encounterUIElement in encounterUI)
         {
             encounterUIElement.SetActive(true);
