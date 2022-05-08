@@ -1,33 +1,25 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
-using UnityEngine.U2D;
-using UnityEngine.UIElements;
-
 public class PlayerMovement : MonoBehaviour
 {
-    public int maxRaycastHits;
     private bool _isMouseClicked;
     private Camera _camera;
     private Vector3 _mousePosition;
-    private RaycastHit2D[] _hits;
-    private Vector3 _playerPosition;
     private Grid _grid;
-
-    private Tilemap _tilemap;
+    private Vector3Int _myCell;
+    private GameManager _gameManager;
+    private PlayerEncounter _playerEncounter;
+    public float xOffset;
 
     // Start is called before the first frame update
     private void Start()
     {
         _camera = Camera.main;
-        _hits = new RaycastHit2D[maxRaycastHits];
-        _playerPosition = this.gameObject.transform.position;
-        _tilemap = FindObjectOfType<Tilemap>();
         _grid = FindObjectOfType<Grid>();
+        _myCell = _grid.WorldToCell(this.transform.position);
+        _gameManager = GameManager.Instance;
+        _gameManager.GameCharTracker.Add(this.gameObject, _myCell);
+        _playerEncounter = GetComponent<PlayerEncounter>();
     }
 
     // Update is called once per frame
@@ -44,14 +36,55 @@ public class PlayerMovement : MonoBehaviour
         if (!_isMouseClicked) return;
         
         _isMouseClicked = false;
-
-        float invertedCameraZ = -_camera.transform.position.z;
-        var mouseWorldPosition = _camera.ScreenToWorldPoint(new Vector3(_mousePosition.x, _mousePosition.y, invertedCameraZ));
-
+        
+        _mousePosition.z = -_camera.transform.position.z; //inverted camera Z position
+        
+        var mouseWorldPosition = _camera.ScreenToWorldPoint(_mousePosition);
+        
         var cellPosition = _grid.WorldToCell(mouseWorldPosition);
 
-        var cellCenter = _grid.GetCellCenterWorld(cellPosition);
-        
+        _myCell = _grid.WorldToCell(this.transform.position);
+
+        if (IsAdjacent(_myCell, cellPosition))
+        {
+            MovePlayer(cellPosition);
+        }
+
+    }
+
+    private void MovePlayer(Vector3Int cell)
+    {
+        var cellCenter = _grid.GetCellCenterWorld(cell);
         transform.position = cellCenter;
-    } 
+
+        _gameManager.GameCharTracker[this.gameObject] = cell;
+
+        var charsInCell = _gameManager.CharsInCell(cell);
+
+        if (charsInCell != null)
+        {
+            foreach (var gameChar in charsInCell)
+            {
+                if (gameChar != this.gameObject)
+                {
+                    cellCenter.x += xOffset;
+                    this.transform.position = cellCenter;
+                    EnterEncounter(gameChar.GetComponent<EnemyEncounter>());
+                }
+            }
+        }
+    }
+    
+    //BUG: fix being able to move to a diagonal non adjacent tile 
+    private static bool IsAdjacent(Vector3Int cell1, Vector3Int cell2)
+    {
+        return Math.Abs(cell1.x - cell2.x) <= 1 && Math.Abs(cell1.y - cell2.y) <= 1;
+    }
+
+    private void EnterEncounter(EnemyEncounter enemy)
+    {
+        _playerEncounter.enabled = true;
+        _playerEncounter.enemy = enemy;
+        this.enabled = false;
+    }
 }
