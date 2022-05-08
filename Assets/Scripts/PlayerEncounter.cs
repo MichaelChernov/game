@@ -35,10 +35,12 @@ public class PlayerEncounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         foreach (var encounterUIElement in encounterUI)
         {
             encounterUIElement.SetActive(true);
         }
+        */
 
         limbs = new Dictionary<string, List<LimbEffects>>();
         activeEffects = new List<MindEffects>();
