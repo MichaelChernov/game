@@ -1,0 +1,262 @@
+<Project>
+  <Name>Game</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Main Diagram</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>GameChar</Name>
+        <Access>Public</Access>
+        <Location left="578" top="162" />
+        <Size width="201" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">CharType charType</Member>
+        <Member type="Method">public void Combat(GameChar enemy)</Member>
+        <Member type="Property">public float Health { get; set; }</Member>
+        <Member type="Property">public string Name { get; set; }</Member>
+        <Member type="Method">public void Move(Vector3Int tile)</Member>
+        <Member type="Property">public MapDirections FrontDirection { get; set; }</Member>
+        <Member type="Property">public Vector3Int CellPos { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CharGroup</Name>
+        <Access>Public</Access>
+        <Location left="218" top="162" />
+        <Size width="204" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public string Name { get; set; }</Member>
+        <Member type="Method">public void Combat(CharGroup enemy)</Member>
+        <Member type="Method">public bool Move(Vector3Int cell)</Member>
+        <Member type="Property">public GroupType groupType { get; set; }</Member>
+        <Member type="Property">public Vector3Int CellPos { get; set; }</Member>
+        <Member type="Property">public List&lt;GameChar&gt; Chars { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CharType</Name>
+        <Access>Public</Access>
+        <Location left="881" top="162" />
+        <Size width="235" height="304" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">BasicType basicType</Member>
+        <Member type="Field">PrimaryWeapon primaryWeapon</Member>
+        <Member type="Property">public string Name { get; set; }</Member>
+        <Member type="Method">public static bool IsCounteredBy(CharType enemy)</Member>
+        <Member type="Method">public static bool DoesCounter(CharType enemy)</Member>
+        <Member type="Property">public int MaxMovementRange { get; set; }</Member>
+        <Member type="Property">public int MaxAttackRange { get; set; }</Member>
+        <Member type="Property">public int MinAttackRange { get; set; }</Member>
+        <Member type="Property">public CharDirections SideStats { get; set; }</Member>
+        <Member type="Property">public float MaxHealth { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>BasicType</Name>
+        <Access>Public</Access>
+        <Location left="1152" top="570" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>LightInfantry</Value>
+        <Value>MediumInfantry</Value>
+        <Value>HeavyInfantry</Value>
+        <Value>LightCavalry</Value>
+        <Value>HeavyCavalry</Value>
+        <Value>Chariot</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>PrimaryWeapon</Name>
+        <Access>Public</Access>
+        <Location left="680" top="570" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>Spear</Value>
+        <Value>Sword</Value>
+        <Value>Blunt</Value>
+        <Value>Bow</Value>
+        <Value>Thrown</Value>
+      </Entity>
+      <Entity type="Structure">
+        <Name>CharDirections</Name>
+        <Access>Public</Access>
+        <Location left="1174" top="206" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public CharDirection Front { get; set; }</Member>
+        <Member type="Property">public CharDirection Back { get; set; }</Member>
+        <Member type="Property">public CharDirection FrontRight { get; set; }</Member>
+        <Member type="Property">public CharDirection FrontLeft { get; set; }</Member>
+        <Member type="Property">public CharDirection BackRight { get; set; }</Member>
+        <Member type="Property">public CharDirection BackLeft { get; set; }</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>CharDirection</Name>
+        <Access>Public</Access>
+        <Location left="1406" top="206" />
+        <Size width="237" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public bool CanAttack { get; set; }</Member>
+        <Member type="Property">public bool CanDefend { get; set; }</Member>
+        <Member type="Property">public float AttackMultiplier { get; set; }</Member>
+        <Member type="Property">public float DefenseMultiplier { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>MapDirections</Name>
+        <Access>Public</Access>
+        <Location left="387" top="570" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>North</Value>
+        <Value>South</Value>
+        <Value>NorthEast</Value>
+        <Value>SouthEast</Value>
+        <Value>NorthWest</Value>
+        <Value>SouthWest</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>GroupType</Name>
+        <Access>Public</Access>
+        <Location left="152" top="570" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public int SizeRank { get; set; }</Member>
+        <Member type="Property">public int MaxSize { get; set; }</Member>
+        <Member type="Property">public int MinSize { get; set; }</Member>
+        <Member type="Property">public Cultures Culture { get; set; }</Member>
+        <Member type="Property">public string Name { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>Cultures</Name>
+        <Access>Public</Access>
+        <Location left="365" top="892" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>Roman</Value>
+        <Value>Nordic</Value>
+        <Value>Germanic</Value>
+        <Value>Gaelic</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>GameCell</Name>
+        <Access>Public</Access>
+        <Location left="365" top="1192" />
+        <Size width="259" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public float DefenseMultiplier { get; set; }</Member>
+        <Member type="Property">public float AttackMultiplier { get; set; }</Member>
+        <Member type="Property">public string Name { get; set; }</Member>
+        <Member type="Property">public Cultures Culture { get; set; }</Member>
+        <Member type="Property">public Faction ControllingFaction { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Faction</Name>
+        <Access>Public</Access>
+        <Location left="820" top="1096" />
+        <Size width="228" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public Cultures PrimaryCulture { get; set; }</Member>
+        <Member type="Property">public GameCell CapitalCell { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="1" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="2">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="4">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="3">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="5">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="5" second="6">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="1" second="8">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="10" second="9">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="11" second="9">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="11" second="10">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="10" second="11">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
