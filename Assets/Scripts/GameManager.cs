@@ -12,9 +12,6 @@ public class GameManager : MonoBehaviour
         get { return _instance; }
     }
 
-    public Dictionary<GameObject, Vector3Int> GameCharTracker { get; set; }
-    private List<GameObject> _charsInCell;
-
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -25,9 +22,6 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
         }
-        
-        GameCharTracker = new Dictionary<GameObject, Vector3Int>();
-        _charsInCell = new List<GameObject>();
     }
 
     // Start is called before the first frame update
@@ -35,21 +29,5 @@ public class GameManager : MonoBehaviour
     {
         
         
-    }
-
-    public List<GameObject> CharsInCell(Vector3Int cell)
-    {
-        _charsInCell.Clear();
-        
-        foreach (var gameChar in GameCharTracker.Keys)
-        {
-            if (GameCharTracker[gameChar] == cell)
-            {
-
-                _charsInCell.Add(gameChar);
-            }
-        }
-
-        return _charsInCell.Count == 0 ? null : _charsInCell;
     }
 }
