@@ -11,6 +11,6 @@ public enum Cultures
 }
 public class Faction : MonoBehaviour
 {
-    public GameCell capitalCell { get; set; }
+    public GameTile capitalCell { get; set; }
     public Cultures primaryCulture { get; set; }
 }

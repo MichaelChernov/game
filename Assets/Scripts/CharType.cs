@@ -33,7 +33,7 @@ public enum CharDirections
 
 public class CharType : MonoBehaviour
 {
-    public Dictionary<CharDirections, CharDirection> sideStats { get; set; }
+    public Dictionary<CharDirections, CharSide> sideStats { get; set; }
     public float maxHealth { get; set; }
     public int maxMovementRange { get; set; }
     public int maxAttackRange { get; set; }

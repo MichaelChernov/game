@@ -25,15 +25,25 @@ public class GameChar : MonoBehaviour
     public CharType charType { get; set; }
     public float health { get; set; }
     
-    public GameCell currentCell { get; set; }
+    public GameTile tile { get; set; }
 
     private bool _isAttacking;
-    private Grid _grid;
 
-    private GameChar()
+    private CharSide[] _sides;
+    public MapDirections front { get; set; }
+    
+    private void Start()
     {
-        _grid = FindObjectOfType<Grid>();
-        currentCell = _grid.WorldToCell(this.transform.position);
+        tile = GameTile.GetTile(this.transform.position);
+        tile.gameChar = this;
+        
+        _sides = new CharSide[6];
+        _sides[0] = new CharSide();
+        _sides[1] = new CharSide();
+        _sides[2] = new CharSide();
+        _sides[3] = new CharSide();
+        _sides[4] = new CharSide();
+        _sides[5] = new CharSide();
     }
 
     public void Attack(GameChar enemy)
@@ -42,25 +52,11 @@ public class GameChar : MonoBehaviour
         //main combat loop
         while (_isAttacking)
         {
-            damage = this.charType.CalcCounterMultiplier(enemy.charType) * this.currentCell.attackMultiplier *
-                     enemy.currentCell.defenseMultiplier;
+            damage = this.charType.CalcCounterMultiplier(enemy.charType) * this.tile.attackMultiplier *
+                     enemy.tile.defenseMultiplier;
             enemy.health -= damage;
             
             
         }
-    }
-
-    public void Move(Vector3Int cell)
-    {
-        var cellCenter = _grid.GetCellCenterWorld(cell);
-        transform.position = cellCenter;
-
-        this.transform.position = cellCenter;
-    }
-    
-    //BUG: fix being able to move to a diagonal non adjacent tile 
-    private static bool IsAdjacent(Vector3Int cell1, Vector3Int cell2)
-    {
-        return Math.Abs(cell1.x - cell2.x) <= 1 && Math.Abs(cell1.y - cell2.y) <= 1;
     }
 }
